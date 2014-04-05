@@ -3,3 +3,5 @@ Based on work done by:
 https://github.com/crewrktablets/rk3x_kernel_3.0.36
 https://github.com/omegamoon/Rockchip-GPL-Kernel
 
+Compile with:
+export CROSS_COMPILE=/home/mihai/android/kernel/toolchains/arm-eabi-4.4.3/bin/arm-eabi-
