@@ -1947,7 +1947,7 @@ static struct platform_device device_ion = {
 #define SDMMC1_WRITE_PROTECT_PIN	RK30_PIN3_PB3	//According to your own project to set the value of write-protect-pin.
 #endif
 
-#define RK29SDK_WIFI_SDIO_CARD_DETECT_N    RK30_PIN3_PD0//RK30_PIN6_PB2 //schimbat mfd wifi reg on? RK30_PIN3_PD0-nu mere
+#define RK29SDK_WIFI_SDIO_CARD_DETECT_N    RK30_PIN6_PB2 //schimbat mfd wifi reg on? RK30_PIN3_PD0-nu mere
 #define RK29SDK_WIFI_SDIO_CARD_INT         RK30_PIN3_PD2
 
 #define RK29SDK_SD_CARD_DETECT_N        RK30_PIN3_PB6  //According to your own project to set the value of card-detect-pin.
