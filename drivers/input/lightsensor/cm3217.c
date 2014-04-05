@@ -24,7 +24,7 @@
 #include <linux/earlysuspend.h>
 #endif
 
-#define DEBUG 	0
+#define DEBUG 	1
 
 #if DEBUG
 #define DBG(X...)	printk(KERN_NOTICE X)

@@ -36,6 +36,7 @@ struct linux_logo {
 extern const struct linux_logo logo_linux_mono;
 extern const struct linux_logo logo_linux_vga16;
 extern const struct linux_logo logo_linux_clut224;
+extern const struct linux_logo logo_charge_clut224;
 extern const struct linux_logo logo_blackfin_vga16;
 extern const struct linux_logo logo_blackfin_clut224;
 extern const struct linux_logo logo_dec_clut224;
@@ -49,7 +50,7 @@ extern const struct linux_logo logo_superh_clut224;
 extern const struct linux_logo logo_m32r_clut224;
 extern const struct linux_logo logo_spe_clut224;
 extern const struct linux_logo logo_g3_clut224;
-extern const struct linux_logo logo_sunset_bmp;
+extern const struct linux_logo logo_bmp;
 
 
 extern const struct linux_logo *fb_find_logo(int depth);

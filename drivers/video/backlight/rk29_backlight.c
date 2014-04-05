@@ -233,6 +233,13 @@ void rk29_backlight_set(bool on)
 }
 EXPORT_SYMBOL(rk29_backlight_set);
 #endif
+//mfd1000 - adaugat din cel vechi
+void bl_check_low_battery(void)
+{
+    printk("bl_check_low_battery: %s\n", __func__);
+	rk29_bl_update_status(rk29_bl);
+}
+EXPORT_SYMBOL(bl_check_low_battery);
 
 static int rk29_backlight_probe(struct platform_device *pdev)
 {		

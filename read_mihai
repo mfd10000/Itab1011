@@ -1,0 +1,9 @@
+
+09-01-2014
+
+1. ai mutat clock.c din ...plat-rk/clock.c in mach-rk30 si ai schimbat makefile din mach-rk30 pentru build kernel din CM10.1,
+2. mutat rkwifi_sys_iface.c din directorul lui in
+/home/mihai/android/kernel/rk30/rk3x_kernel_3.0.36/drivers/net/wireless
+si s-a modificat fisierul Makefile 
+
+Daca crapa trebuie dus la loc

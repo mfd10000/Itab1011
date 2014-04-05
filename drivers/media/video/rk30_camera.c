@@ -1188,6 +1188,7 @@ static int rk_sensor_iomux(int pin)
         }
         case RK30_PIN3_PD0:
         {
+		printk("Inchidere din rk30_camera 3pd0");
              rk30_mux_api_set(GPIO3D0_SDMMC1PWREN_NAME,0);
             break;	
         }
@@ -1198,6 +1199,7 @@ static int rk_sensor_iomux(int pin)
         }
         case RK30_PIN3_PD2:
         {
+	     printk("Inchidere din rk30_camera 3pd2");
              rk30_mux_api_set(GPIO3D2_SDMMC1INTN_NAME,0);
             break;	
         }

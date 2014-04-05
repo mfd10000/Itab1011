@@ -1,6 +1,7 @@
 EXTRA_CFLAGS += -Os
 ifneq ($(CONFIG_RK_FPGA),y)
-obj-y += ../plat-rk/clock.o
+#obj-y += ../plat-rk/clock.o
+obj-y += clock.o
 obj-$(CONFIG_ARCH_RK30XX) += clock_data.o
 obj-$(CONFIG_ARCH_RK3066B) += clock_data-rk3066b.o
 endif
@@ -35,7 +36,7 @@ obj-$(CONFIG_MACH_RK30_PHONE_LOQUAT) += board-rk30-phone-loquat.o board-rk30-pho
 obj-$(CONFIG_MACH_RK30_DS1001B) += board-rk30-ds1001b.o board-rk30-ds1001b-key.o board-rk30-ds1001b-rfkill.o
 obj-$(CONFIG_MACH_RK30_PHONE_A22) += board-rk30-phone-a22.o board-rk30-phone-a22-key.o 
 obj-$(CONFIG_MACH_PIPO_M3) += board-pipo-m3.o board-rk30-sdk-key.o
-obj-$(CONFIG_MACH_RK30_CUBE_U30GT) += board-cube-u30gt.o board-rk30-phonepad-key.o
+obj-$(CONFIG_MACH_RK30_CUBE_U30GT) += board-cube-u30gt.o board-rk30-sdk-key.o
 obj-$(CONFIG_MACH_ODYS_GENIO) += board-odys-genio.o board-rk30-sdk-key.o
 obj-$(CONFIG_MACH_ODYS_XELIO10PRO) += board-odys-xelio10pro.o board-rk30-sdk-key.o
 obj-$(CONFIG_MACH_ARCHOS_GAMEPAD) += board-archos-gamepad.o board-rk30-sdk-key.o

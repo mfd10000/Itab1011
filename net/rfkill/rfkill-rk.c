@@ -43,11 +43,11 @@
 #include <asm/irq.h>
 #include <linux/suspend.h>
 
-#if 0
+//#if 0
 #define DBG(x...)   printk(KERN_INFO "[BT_RFKILL]: "x)
-#else
-#define DBG(x...)
-#endif
+//#else
+//#define DBG(x...)
+//#endif
 
 #define LOG(x...)   printk(KERN_INFO "[BT_RFKILL]: "x)
 

@@ -4,7 +4,7 @@
 # * if no device(s) is/are specified, ALL known devices are built
 
 # kown devices to be built
-KNOWNDEVICES="odys_genio"
+KNOWNDEVICES="cube_u30gt"
 # additional options for make
 # path to kernel archive
 KERNEL_PATH="../kernels"
@@ -77,6 +77,7 @@ for device in ${DEVICES} ; do
   # archive kernel.img
   mkdir -p ${KERNEL_PATH}/${device}/${rev}
   cp kernel.img ${KERNEL_PATH}/${device}/${rev}
+  cp arch/arm/configs/cube_u30gt_defconfig ${KERNEL_PATH}/${device}/${rev}
   7z a ${KERNEL_PATH}/crewrktablets_kernel_3036_${device}_${rev}.7z kernel.img
 
   # tag current git state with delivery tag

@@ -38,6 +38,10 @@ const unsigned char password[32] = {
     0x7e, 0x60, 0xb1, 0x67
 };
 
+#ifdef CONFIG_POWER_ON_CHARGER_DISPLAY
+extern int charger_in_logo;
+#endif
+
 /* logo's are marked __initdata. Use __init_refok to tell
  * modpost that it is intended that this function uses data
  * marked __initdata.
@@ -78,7 +82,15 @@ const struct linux_logo * __init_refok fb_find_logo(int depth)
 	if (depth >= 8) {
 #ifdef CONFIG_LOGO_LINUX_CLUT224
 		/* Generic Linux logo */
+#ifdef CONFIG_POWER_ON_CHARGER_DISPLAY
+        if (charger_in_logo == 0) {
+#endif
 		logo = &logo_linux_clut224;
+#ifdef CONFIG_POWER_ON_CHARGER_DISPLAY
+        } else {
+		logo = &logo_charge_clut224;
+        }
+#endif
 #endif
 #ifdef CONFIG_LOGO_G3_CLUT224
 		/* Generic Linux logo */
@@ -123,9 +135,7 @@ const struct linux_logo * __init_refok fb_find_logo(int depth)
 		if (depth >= 24)
 		{
 			#ifdef  CONFIG_LOGO_LINUX_BMP
-			#ifdef CONFIG_LOGO_LINUX_BMP
-			logo = &logo_sunset_bmp;
-			#endif
+			logo = &logo_bmp;	
 			#endif	
 		}
 		else

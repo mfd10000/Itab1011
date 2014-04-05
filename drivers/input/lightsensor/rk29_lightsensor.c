@@ -22,7 +22,7 @@
 #include <linux/earlysuspend.h>
 #endif
 
-#include <mach/rk29_lightsensor.h>
+#include <rk29_lightsensor.h>
 #ifdef CONFIG_HAS_EARLYSUSPEND
 static struct early_suspend cm3202_early_suspend;
 #endif

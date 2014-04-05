@@ -36,11 +36,11 @@
 #include <linux/fs.h>
 #include <linux/wakelock.h>
 
-#if 0
+//#if 0
 #define DBG(x...)   printk(x)
-#else
-#define DBG(x...)
-#endif
+//#else
+//#define DBG(x...)
+//#endif
 
 static int rk30_battery_dbg_level = 0;
 module_param_named(dbg_level, rk30_battery_dbg_level, int, 0644);

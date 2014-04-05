@@ -21,10 +21,10 @@ static void rk29_sdmmc_gpio_open(int device_id, int on)
     switch(device_id)
     {
         case 0://mmc0
-        {
+        {	pr_info("am intrat la initializare pe mmc0");
             #ifdef CONFIG_SDMMC0_RK29
             if(on)
-            {
+            {	pr_info("daca pe mmc0 pornit...");
                 gpio_direction_output(GPIO3B_GPIO3B0,GPIO_HIGH);//set mmc0-clk to high
                 gpio_direction_output(GPIO3B_GPIO3B1,GPIO_HIGH);// set mmc0-cmd to high.
                 gpio_direction_output(GPIO3B_GPIO3B2,GPIO_HIGH);//set mmc0-data0 to high.
@@ -35,7 +35,7 @@ static void rk29_sdmmc_gpio_open(int device_id, int on)
                 mdelay(30);
             }
             else
-            {
+            {	pr_info("daca pe mmc0 oprit");
                 rk30_mux_api_set(GPIO3B0_SDMMC0CLKOUT_NAME, GPIO3B_GPIO3B0);
                 gpio_request(RK30_PIN3_PB0, "mmc0-clk");
                 gpio_direction_output(RK30_PIN3_PB0,GPIO_LOW);//set mmc0-clk to low.
@@ -67,20 +67,20 @@ static void rk29_sdmmc_gpio_open(int device_id, int on)
         break;
         
         case 1://mmc1
-        {
+        {	 pr_info("am intrat la initializare pe mmc1");
             #ifdef CONFIG_SDMMC1_RK29
             if(on)
-            {
+            {	pr_info("daca pe mmc1 pornit");
                 gpio_direction_output(RK30_PIN3_PC5,GPIO_HIGH);//set mmc1-clk to high
                 gpio_direction_output(RK30_PIN3_PC0,GPIO_HIGH);//set mmc1-cmd to high.
                 gpio_direction_output(RK30_PIN3_PC1,GPIO_HIGH);//set mmc1-data0 to high.
                 gpio_direction_output(RK30_PIN3_PC2,GPIO_HIGH);//set mmc1-data1 to high.
                 gpio_direction_output(RK30_PIN3_PC3,GPIO_HIGH);//set mmc1-data2 to high.
-                gpio_direction_output(RK30_PIN3_PC5,GPIO_HIGH);//set mmc1-data3 to high.
+                gpio_direction_output(RK30_PIN3_PC5,GPIO_HIGH);//set mmc1-data3 to high.//pus PIN3_PC4 mfd; era pc5 ca la clok
                 mdelay(100);
             }
             else
-            {
+            {	pr_info("daca pe mmc1 oprit");
                 rk30_mux_api_set(GPIO3C5_SDMMC1CLKOUT_NAME, GPIO3C_GPIO3C5);
                 gpio_request(RK30_PIN3_PC5, "mmc1-clk");
                 gpio_direction_output(RK30_PIN3_PC5,GPIO_LOW);//set mmc1-clk to low.
@@ -92,7 +92,7 @@ static void rk29_sdmmc_gpio_open(int device_id, int on)
                 rk30_mux_api_set(GPIO3C1_SDMMC1DATA0_NAME, GPIO3C_GPIO3C1);
                 gpio_request(RK30_PIN3_PC1, "mmc1-data0");
                 gpio_direction_output(RK30_PIN3_PC1,GPIO_LOW);//set mmc1-data0 to low.
-            #if defined(CONFIG_WIFI_COMBO_MODULE_CONTROL_FUNC)
+            #if defined(CONFIG_WIFI_COMBO_MODULE_CONTROL_FUNC) //mmc1 cu combo?
                 rk29_mux_api_set(GPIO3C2_SDMMC1DATA1_NAME, GPIO3C_GPIO3C2);
                 gpio_request(RK30_PIN3_PC2, "mmc1-data1");
                 gpio_direction_output(RK30_PIN3_PC2,GPIO_LOW);//set mmc1-data1 to low.
@@ -107,6 +107,7 @@ static void rk29_sdmmc_gpio_open(int device_id, int on)
            #endif
                 mdelay(100);
             }
+		pr_info("am iesit din mmc1");
             #endif
         }
         break; 
@@ -120,12 +121,12 @@ static void rk29_sdmmc_gpio_open(int device_id, int on)
 }
 
 static void rk29_sdmmc_set_iomux_mmc0(unsigned int bus_width)
-{
+{pr_info("am intrat pe bus mmc0???");
     switch (bus_width)
     {
         
     	case 1://SDMMC_CTYPE_4BIT:
-    	{
+    	{	pr_info("bus pe mmc0 - nu ar trebui sa vad mesajul");
         	rk30_mux_api_set(GPIO3B3_SDMMC0DATA1_NAME, GPIO3B_SDMMC0_DATA1);
         	rk30_mux_api_set(GPIO3B4_SDMMC0DATA2_NAME, GPIO3B_SDMMC0_DATA2);
         	rk30_mux_api_set(GPIO3B5_SDMMC0DATA3_NAME, GPIO3B_SDMMC0_DATA3);
@@ -136,6 +137,7 @@ static void rk29_sdmmc_set_iomux_mmc0(unsigned int bus_width)
     	    break;
     	case 0xFFFF: //gpio_reset
     	{
+		pr_info("S-a primit reset pe bus");
             rk30_mux_api_set(GPIO3A7_SDMMC0PWREN_NAME, GPIO3A_GPIO3A7);
             gpio_request(RK30_PIN3_PA7,"sdmmc-power");
             gpio_direction_output(RK30_PIN3_PA7,GPIO_HIGH); //power-off
@@ -151,7 +153,7 @@ static void rk29_sdmmc_set_iomux_mmc0(unsigned int bus_width)
     	break;
 
     	default: //case 0://SDMMC_CTYPE_1BIT:
-        {
+        {	pr_info("sunt pe sdmc de 1 bit?Ceva cu mmc0 oricum");
         	rk30_mux_api_set(GPIO3B1_SDMMC0CMD_NAME, GPIO3B_SDMMC0_CMD);
         	rk30_mux_api_set(GPIO3B0_SDMMC0CLKOUT_NAME, GPIO3B_SDMMC0_CLKOUT);
         	rk30_mux_api_set(GPIO3B2_SDMMC0DATA0_NAME, GPIO3B_SDMMC0_DATA0);
@@ -173,7 +175,7 @@ static void rk29_sdmmc_set_iomux_mmc0(unsigned int bus_width)
 }
 
 static void rk29_sdmmc_set_iomux_mmc1(unsigned int bus_width)
-{
+{pr_info("am intrat pe bus cu mmc1-ok trimit comenzi");
     rk30_mux_api_set(GPIO3C0_SMMC1CMD_NAME, GPIO3C_SMMC1_CMD);
     rk30_mux_api_set(GPIO3C5_SDMMC1CLKOUT_NAME, GPIO3C_SDMMC1_CLKOUT);
     rk30_mux_api_set(GPIO3C1_SDMMC1DATA0_NAME, GPIO3C_SDMMC1_DATA0);
@@ -220,7 +222,7 @@ static int rk29sdk_wifi_mmc0_status_register(void (*callback)(int card_presend, 
 static int rk29sdk_wifi_mmc0_cd = 0;   /* wifi virtual 'card detect' status */
 static void (*wifi_mmc0_status_cb)(int card_present, void *dev_id);
 static void *wifi_mmc0_status_cb_devid;
-
+pr_info("am intrat pe la combo de ce???");
 int rk29sdk_wifi_power_state = 0;
 int rk29sdk_bt_power_state = 0;
 #endif
@@ -237,7 +239,7 @@ static void *wifi_status_cb_devid;
 
 #if defined(CONFIG_RK903) || defined(CONFIG_RK901)
 #define RK30SDK_WIFI_GPIO_POWER_N       RK30_PIN3_PD0
-#define RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE GPIO_HIGH 
+#define RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE GPIO_HIGH //
 #endif
 
 #if defined(CONFIG_RTL8192CU) || defined(CONFIG_RTL8188EU) 
@@ -329,12 +331,12 @@ err_skb_alloc:
 }
 
 static int rk29sdk_wifi_status(struct device *dev)
-{
-        return rk29sdk_wifi_cd;
+{	//pr_info("La prima trecere: %n",&rk29sdk_wifi_cd);
+        return rk29sdk_wifi_cd; 
 }
 
 static int rk29sdk_wifi_status_register(void (*callback)(int card_present, void *dev_id), void *dev_id)
-{
+{	pr_info("La register raspund tot cu COMBO??");
         if(wifi_status_cb)
                 return -EAGAIN;
         wifi_status_cb = callback;
@@ -343,7 +345,7 @@ static int rk29sdk_wifi_status_register(void (*callback)(int card_present, void 
 }
 
 static int __init rk29sdk_wifi_bt_gpio_control_init(void)
-{
+{	pr_info("Initializare BT?");
     rk29sdk_init_wifi_mem();
     
     rk29_mux_api_set(GPIO3D0_SDMMC1PWREN_NAME, GPIO3D_GPIO3D0);
@@ -352,7 +354,7 @@ static int __init rk29sdk_wifi_bt_gpio_control_init(void)
            pr_info("%s: request wifi power gpio failed\n", __func__);
            return -1;
     }
-
+/*
 #ifdef RK30SDK_WIFI_GPIO_RESET_N
     if (gpio_request(RK30SDK_WIFI_GPIO_RESET_N, "wifi reset")) {
            pr_info("%s: request wifi reset gpio failed\n", __func__);
@@ -360,14 +362,15 @@ static int __init rk29sdk_wifi_bt_gpio_control_init(void)
            return -1;
     }
 #endif    
-
-    gpio_direction_output(RK30SDK_WIFI_GPIO_POWER_N, !RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE);
+*/
+    gpio_direction_output(RK30SDK_WIFI_GPIO_POWER_N, GPIO_LOW);//!RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE);
+/*
 #ifdef RK30SDK_WIFI_GPIO_RESET_N    
     gpio_direction_output(RK30SDK_WIFI_GPIO_RESET_N, !RK30SDK_WIFI_GPIO_RESET_ENABLE_VALUE);
 #endif    
-
+*/
     #if defined(CONFIG_SDMMC1_RK29) && !defined(CONFIG_SDMMC_RK29_OLD)
-    
+    pr_info("Setare comunicate BT?");
     rk29_mux_api_set(GPIO3C2_SDMMC1DATA1_NAME, GPIO3C_GPIO3C2);
     gpio_request(RK30_PIN3_PC2, "mmc1-data1");
     gpio_direction_output(RK30_PIN3_PC2,GPIO_LOW);//set mmc1-data1 to low.
@@ -382,54 +385,58 @@ static int __init rk29sdk_wifi_bt_gpio_control_init(void)
     
     rk29_sdmmc_gpio_open(1, 0); //added by xbw at 2011-10-13
     #endif    
-    pr_info("%s: init finished\n",__func__);
+    pr_info("TErminat wifi_bt %s: init finished\n",__func__);
 
     return 0;
 }
 
 int rk29sdk_wifi_power(int on)
 {
-        pr_info("%s: %d\n", __func__, on);
+        pr_info("Pornesc puterea: %s: %d\n", __func__, on);
         if (on){
-                gpio_set_value(RK30SDK_WIFI_GPIO_POWER_N, RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE);
+                gpio_set_value(RK30SDK_WIFI_GPIO_POWER_N,  GPIO_HIGH);//RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE);
 
                 #if defined(CONFIG_SDMMC1_RK29) && !defined(CONFIG_SDMMC_RK29_OLD)	
+		pr_info("Apel gpio_open()");
                 rk29_sdmmc_gpio_open(1, 1); //added by xbw at 2011-10-13
                 #endif
-
+/*
 #ifdef RK30SDK_WIFI_GPIO_RESET_N
                 gpio_set_value(RK30SDK_WIFI_GPIO_RESET_N, RK30SDK_WIFI_GPIO_RESET_ENABLE_VALUE);
 #endif                
+*/
                 mdelay(100);
-                pr_info("wifi turn on power\n");
+                pr_info("Mihai wifi turn on power\n");
         }else{
 //                if (!rk29sdk_bt_power_state){
-                        gpio_set_value(RK30SDK_WIFI_GPIO_POWER_N, !RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE);
-
+                        gpio_set_value(RK30SDK_WIFI_GPIO_POWER_N, GPIO_LOW);// !RK30SDK_WIFI_GPIO_POWER_ENABLE_VALUE);
+			pr_info("Apel inchidere. De unde???");
                         #if defined(CONFIG_SDMMC1_RK29) && !defined(CONFIG_SDMMC_RK29_OLD)	
                         rk29_sdmmc_gpio_open(1, 0); //added by xbw at 2011-10-13
                         #endif
                         
                         mdelay(100);
-                        pr_info("wifi shut off power\n");
+                        pr_info("Aci opri! wifi shut off power\n");
 //                }else
 //                {
 //                        pr_info("wifi shouldn't shut off power, bt is using it!\n");
 //                }
+/*
 #ifdef RK30SDK_WIFI_GPIO_RESET_N
                 gpio_set_value(RK30SDK_WIFI_GPIO_RESET_N, !RK30SDK_WIFI_GPIO_RESET_ENABLE_VALUE);
 #endif 
+*/
         }
 
 //        rk29sdk_wifi_power_state = on;
         return 0;
 }
-EXPORT_SYMBOL(rk29sdk_wifi_power);
+//EXPORT_SYMBOL(rk29sdk_wifi_power);//mfd
 
 static int rk29sdk_wifi_reset_state;
 static int rk29sdk_wifi_reset(int on)
 {
-        pr_info("%s: %d\n", __func__, on);
+        pr_info("Facem un reset??: %s: %d\n", __func__, on);
         //mdelay(100);
         rk29sdk_wifi_reset_state = on;
         return 0;
@@ -437,7 +444,7 @@ static int rk29sdk_wifi_reset(int on)
 
 int rk29sdk_wifi_set_carddetect(int val)
 {
-        pr_info("%s:%d\n", __func__, val);
+        pr_info("Incep detectare card: %s:%d\n", __func__, val);
         rk29sdk_wifi_cd = val;
         if (wifi_status_cb){
                 wifi_status_cb(val, wifi_status_cb_devid);
